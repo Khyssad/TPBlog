@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Tous les articles{% endblock %}
+
+{% block body %}
+    <main class="container">
+        <h1 class="mb-4">Tous les articles</h1>
+        
+        <div class="row">
+            {% for article in articles %}
+                <div class="col-md-4 mb-4">
+                    {% include 'partials/_article_card.html.twig' with {'article': article} %}
+                </div>
+            {% else %}
+                <p class="text-center">Aucun article disponible pour le moment.</p>
+            {% endfor %}
+        </div>
+
+        {% if articles.haveToPaginate is defined and articles.haveToPaginate %}
+            <div class="navigation">
+                {{ knp_pagination_render(articles) }}
+            </div>
+        {% endif %}
+    </main>
+{% endblock %}

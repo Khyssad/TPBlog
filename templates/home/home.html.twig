@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Bienvenue sur notre blog{% endblock %}
+
+{% block body %}
+    <main class="container">
+        <h1 class="mb-4">Bienvenue sur notre blog</h1>
+        
+        <section class="articles mb-5">
+            <h2 class="sr-only">Articles récents</h2>
+            <div class="row">
+                {% for article in articles %}
+                    <div class="col-md-4 mb-4">
+                        {% include 'partials/_article_card.html.twig' with {'article': article} %}
+                    </div>
+                {% else %}
+                    <p class="text-center">Aucun article disponible pour le moment.</p>
+                {% endfor %}
+            </div>
+        </section>
+
+        <section class="newsletter bg-light p-4 mb-5">
+            <h2 class="h3 mb-3">Inscrivez-vous à notre newsletter</h2>
+            {{ include('partials/_newsletter_form.html.twig') }}
+        </section>
+
+        <section class="cta text-center">
+            <a href="{{ path('article_index') }}" class="btn btn-primary mr-2">Voir tous les articles</a>
+            <a href="{{ path('premium_subscription') }}" class="btn btn-outline-secondary">Devenir membre premium</a>
+        </section>
+    </main>
+{% endblock %}

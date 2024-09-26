@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ article.title }}{% endblock %}
+
+{% block body %}
+    <article class="container">
+        <header class="mb-4">
+            <h1>{{ article.title }}</h1>
+            <p class="text-muted">
+                Publié le {{ article.createdAt|date('d/m/Y') }} par 
+                <span class="author">{{ article.author }}</span>
+            </p>
+        </header>
+
+        <div class="article-content">
+            {{ article.content|raw }}
+        </div>
+
+        <footer class="mt-4">
+            <div class="tags">
+                {% for tag in article.tags %}
+                    <span class="badge badge-secondary">{{ tag.name }}</span>
+                {% endfor %}
+            </div>
+        </footer>
+
+        <nav class="mt-5">
+            <a href="{{ path('article_index') }}" class="btn btn-outline-primary">&larr; Retour à la liste des articles</a>
+        </nav>
+    </article>
+{% endblock %}
