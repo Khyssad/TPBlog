@@ -3,23 +3,28 @@
 {% block title %}Tous les articles{% endblock %}
 
 {% block body %}
-    <main class="container">
-        <h1 class="mb-4">Tous les articles</h1>
-        
-        <div class="row">
-            {% for article in articles %}
-                <div class="col-md-4 mb-4">
-                    {% include 'partials/_article_card.html.twig' with {'article': article} %}
-                </div>
-            {% else %}
-                <p class="text-center">Aucun article disponible pour le moment.</p>
-            {% endfor %}
-        </div>
-
-        {% if articles.haveToPaginate is defined and articles.haveToPaginate %}
-            <div class="navigation">
-                {{ knp_pagination_render(articles) }}
+    <h1 class="text-center mb-4">Tous les articles</h1>
+    
+    <div class="row">
+        {% for article in pagination %}
+            <div class="col-md-4 mb-4">
+                {% include 'partials/_article_card.html.twig' with {'article': article} %}
             </div>
-        {% endif %}
-    </main>
+        {% else %}
+            <p class="text-center">Aucun article disponible pour le moment.</p>
+        {% endfor %}
+    </div>
+
+    <div class="navigation">
+        {{ knp_pagination_render(pagination) }}
+    </div>
+
+      <div class="newsletter bg-light p-4 rounded mb-4">
+        <h2 class="h4 mb-3">Inscrivez-vous à notre newsletter</h2>
+        <form action="#" method="post" class="d-flex">
+            <input type="email" name="email" placeholder="Votre email" class="form-control me-2" required>
+            <button type="submit" class="btn btn-primary">S'inscrire</button>
+        </form>
+    </div>
+
 {% endblock %}

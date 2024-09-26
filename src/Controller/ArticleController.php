@@ -11,9 +11,7 @@ use Knp\Component\Pager\PaginatorInterface;
 
 class ArticleController extends AbstractController
 {
-    public function __construct(private ArticleRepository $articleRepository)
-    {
-    }
+    public function __construct(private ArticleRepository $articleRepository) {}
 
     #[Route('/articles', name: 'app_article_index')]
     public function index(Request $request, PaginatorInterface $paginator): Response
@@ -24,10 +22,10 @@ class ArticleController extends AbstractController
         $pagination = $paginator->paginate(
             $queryBuilder,
             $request->query->getInt('page', 1),
-            10 // Nombre d'articles par page
+            6 // Nombre d'articles par page
         );
 
-        return $this->render('article/index.html.twig', [
+        return $this->render('article/all.html.twig', [
             'pagination' => $pagination
         ]);
     }

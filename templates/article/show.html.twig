@@ -3,29 +3,24 @@
 {% block title %}{{ article.title }}{% endblock %}
 
 {% block body %}
-    <article class="container">
+    <article class="bg-white p-4 rounded shadow">
         <header class="mb-4">
             <h1>{{ article.title }}</h1>
             <p class="text-muted">
                 Publié le {{ article.createdAt|date('d/m/Y') }} par 
                 <span class="author">{{ article.author }}</span>
             </p>
+            {% if article.isPremium %}
+                <span class="badge bg-warning text-dark">Article Premium</span>
+            {% endif %}
         </header>
 
         <div class="article-content">
             {{ article.content|raw }}
         </div>
 
-        <footer class="mt-4">
-            <div class="tags">
-                {% for tag in article.tags %}
-                    <span class="badge badge-secondary">{{ tag.name }}</span>
-                {% endfor %}
-            </div>
-        </footer>
-
         <nav class="mt-5">
-            <a href="{{ path('article_index') }}" class="btn btn-outline-primary">&larr; Retour à la liste des articles</a>
+            <a href="{{ path('app_article_index') }}" class="btn btn-outline-primary">&larr; Retour à la liste des articles</a>
         </nav>
     </article>
 {% endblock %}
