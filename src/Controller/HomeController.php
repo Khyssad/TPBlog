@@ -13,6 +13,11 @@ class HomeController extends AbstractController
     {
         return $this->render('home/index.html.twig', [
             'controller_name' => 'HomeController',
+            'articles' => $articles->findBy(
+                [],
+                ['createdAt' => 'DESC'],
+                6
+            )
         ]);
     }
 }
